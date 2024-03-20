@@ -1,9 +1,22 @@
-import List from "./components/List.tsx"
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import MainPage from "./pages/MainPage.tsx"
+import AddPage from "./pages/AddPage.tsx"
+import ReadPage from "./pages/ReadPage.tsx"
+import UpdatePage from "./pages/UpdatePage.tsx"
 
-function App() {
+export default function App() {
     return (
-        <List/>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route index element={<MainPage/>}></Route>
+                    <Route path="/home" element={<MainPage/>}></Route>
+                    <Route path="/add" element={<AddPage/>}></Route>
+                    <Route path="/read" element={<ReadPage/>}></Route>
+                    <Route path="/update" element={<UpdatePage/>}></Route>
+                    <Route path="*" element={<MainPage/>}></Route>
+                </Routes>
+            </BrowserRouter>
+        </>
     )
 }
-
-export default App

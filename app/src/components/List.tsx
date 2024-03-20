@@ -1,6 +1,10 @@
 import {useState} from "react"
 
-function List() {
+export default function List({onAddClick, onReadClick, onUpdateClick}: {
+    onAddClick: () => void;
+    onReadClick: () => void;
+    onUpdateClick: () => void;
+}) {
     const [items, setItems] = useState<string[]>([]);
 
     // TODO open a new web page with an add item menu
@@ -8,9 +12,21 @@ function List() {
     const handleAdd = () => {
         const newItem = "" + items.length;
 
-        setItems([...items, newItem])
+        onAddClick();
 
-        console.log("add");
+        setItems([...items, newItem])
+    }
+
+    const handleRead = () => {
+        onReadClick();
+    }
+
+    const handleUpdate = () => {
+        onUpdateClick();
+    }
+
+    const handleDelete = () => {
+        // TODO
     }
 
     return (
@@ -24,10 +40,15 @@ function List() {
                 top-50 start-50 translate-middle"
             >
                 <button className="border rounded" onClick={handleAdd}>add</button>
-                {items.map(item => <li className="list-group-item border rounded" key={item}>{item}</li>)}
+                {items.map(item =>
+                    <li className="list-group-item border rounded" key={item}>
+                        {item}
+                        <button className="border rounded" onClick={handleRead}>read</button>
+                        <button className="border rounded" onClick={handleUpdate}>update</button>
+                        <button className="border rounded" onClick={handleDelete}>delete</button>
+                    </li>)
+                }
             </ul>
         </>
     )
 }
-
-export default List;
