@@ -1,18 +1,21 @@
-interface Props {
-    onAdd: (newItem: string) => void
-}
+import {useContext} from "react";
+import Context from "./Context.tsx";
 
-export default function AddForm({onAdd}: Props) {
+export default function AddForm() {
+    const context = useContext(Context);
+    const items = context.items;
+    const setItems = context.setItems;
+
     const handleAdd = () => {
-        const newItem = GetInputValue().toString().trim();
+        const value: string = GetInputValue();
 
-        onAdd(newItem);
+        setItems([...items, value]);
     }
 
     return (
         <form className="position-absolute top-50 start-50 translate-middle">
             <input id="add-input" name="add" placeholder="value"/>
-            <button className="border rounded" onClick={handleAdd} type="button">add</button>
+            <button className="border rounded" type="button" onClick={handleAdd}>add</button>
         </form>
     );
 }

@@ -1,23 +1,20 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom"
-import MainPage from "./pages/MainPage.tsx"
-import AddPage from "./pages/AddPage.tsx"
-import ReadPage from "./pages/ReadPage.tsx"
-import UpdatePage from "./pages/UpdatePage.tsx"
+import Router from "./components/Router.tsx"
+import Context from "./components/Context.tsx"
+import {useState} from "react";
 
 export default function App() {
+    const [items, setItems] = useState<string[]>([])
+
+    const data = {
+        items,
+        setItems
+    }
+
     return (
         <>
-            <BrowserRouter>
-                <Routes>
-                    <Route index element={<MainPage/>}></Route>
-                    <Route path="/home" element={<MainPage/>}></Route>
-                    <Route path="/add" element={<AddPage onAdd={() => {
-                    }}/>}></Route>
-                    <Route path="/read" element={<ReadPage/>}></Route>
-                    <Route path="/update" element={<UpdatePage/>}></Route>
-                    <Route path="*" element={<MainPage/>}></Route>
-                </Routes>
-            </BrowserRouter>
+            <Context.Provider value={data}>
+                <Router/>
+            </Context.Provider>
         </>
     )
 }

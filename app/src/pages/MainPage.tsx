@@ -15,8 +15,8 @@ export default function MainPage() {
 
     return (
         <>
+            <button className="border rounded" onClick={handleAddClick}>add</button>
             <List
-                onAddClick={handleAddClick}
                 onReadClick={handleReadClick}
                 onUpdateClick={handleUpdateClick}
             />
