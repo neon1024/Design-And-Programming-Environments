@@ -1,20 +1,22 @@
 import {useState} from "react"
+import AddPage from "../pages/AddPage.tsx";
 
-export default function List({onAddClick, onReadClick, onUpdateClick}: {
+interface Props {
     onAddClick: () => void;
     onReadClick: () => void;
     onUpdateClick: () => void;
-}) {
+}
+
+export default function List({onAddClick, onReadClick, onUpdateClick}: Props) {
     const [items, setItems] = useState<string[]>([]);
 
-    // TODO open a new web page with an add item menu
     // TODO update the list with the new item added
-    const handleAdd = () => {
-        const newItem = "" + items.length;
-
-        onAddClick();
-
+    const onAdd = (newItem: string) => {
         setItems([...items, newItem])
+    }
+
+    const handleAdd = () => {
+        onAddClick();
     }
 
     const handleRead = () => {
@@ -31,24 +33,27 @@ export default function List({onAddClick, onReadClick, onUpdateClick}: {
 
     return (
         <>
-            <ul className="
+            <div className="d-flex">
+                <button className="border rounded" onClick={handleAdd}>add</button>
+                <ul className="
                 list-group
                 flex-row
                 flex-wrap
                 justify-content-center
                 position-absolute
                 top-50 start-50 translate-middle"
-            >
-                <button className="border rounded" onClick={handleAdd}>add</button>
-                {items.map(item =>
-                    <li className="list-group-item border rounded" key={item}>
-                        {item}
-                        <button className="border rounded" onClick={handleRead}>read</button>
-                        <button className="border rounded" onClick={handleUpdate}>update</button>
-                        <button className="border rounded" onClick={handleDelete}>delete</button>
-                    </li>)
-                }
-            </ul>
+                >
+                    {items.map(item =>
+                        <li className="list-group-item border rounded" key={item}>
+                            {item}
+                            <button className="border rounded" onClick={handleRead}>read</button>
+                            <button className="border rounded" onClick={handleUpdate}>update</button>
+                            <button className="border rounded" onClick={handleDelete}>delete</button>
+                        </li>)
+                    }
+                </ul>
+            </div>
+            <AddPage onAdd={onAdd}/>
         </>
     )
 }

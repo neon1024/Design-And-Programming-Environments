@@ -1,6 +1,12 @@
-export default function AddForm() {
+interface Props {
+    onAdd: (newItem: string) => void
+}
+
+export default function AddForm({onAdd}: Props) {
     const handleAdd = () => {
-        console.log(GetInputValue());
+        const newItem = GetInputValue().toString().trim();
+
+        onAdd(newItem);
     }
 
     return (
@@ -12,5 +18,5 @@ export default function AddForm() {
 }
 
 function GetInputValue() {
-    return document.getElementById("add-input").value;
+    return (document.getElementById("add-input") as HTMLInputElement).value;
 }

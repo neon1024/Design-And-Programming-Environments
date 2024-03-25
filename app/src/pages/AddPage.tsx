@@ -1,9 +1,19 @@
 import AddForm from "../components/AddForm.tsx"
 
-export default function AddPage() {
+interface Props {
+    onAdd: (newItem: string) => void
+}
+
+export default function AddPage({onAdd}: Props) {
+    const handleAdd = (newItem: string) => {
+        console.log("add")
+
+        onAdd(newItem)
+    }
+
     return (
         <>
-            <AddForm/>
+            <AddForm onAdd={handleAdd}/>
         </>
     )
 }

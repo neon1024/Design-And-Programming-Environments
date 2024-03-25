@@ -1,7 +1,10 @@
-import ListGroup from "./components/ListGroup.tsx";
+import List from "./components/List.tsx";
+
 function App() {
     return (
-        <div><ListGroup /></div>
+        <>
+            <List/>
+        </>
     )
 }
 
