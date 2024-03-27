@@ -1,9 +1,16 @@
 import AddForm from "../components/AddForm.tsx"
+import Car from "../components/Car.tsx"
+import {Dispatch, SetStateAction} from "react"
 
-export default function AddPage() {
+interface Props {
+    items: Car[];
+    setItems: Dispatch<SetStateAction<Car[]>>;
+}
+
+export default function AddPage({props}: { props: Props }) {
     return (
         <>
-            <AddForm/>
+            <AddForm props={props}/>
         </>
     )
 }

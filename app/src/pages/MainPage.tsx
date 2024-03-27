@@ -1,6 +1,13 @@
 import List from "../components/List.tsx";
+import Car from "../components/Car.tsx";
+import {Dispatch, SetStateAction} from "react";
 
-export default function MainPage() {
+interface Props {
+    items: Car[];
+    setItems: Dispatch<SetStateAction<Car[]>>;
+}
+
+export default function MainPage({props}: { props: Props }) {
     const handleAddClick = () => {
         window.open("/add", "_blank");
     }
@@ -16,9 +23,7 @@ export default function MainPage() {
     return (
         <>
             <button className="border rounded" onClick={handleAddClick}>add</button>
-            <List
-                onReadClick={handleReadClick}
-                onUpdateClick={handleUpdateClick}
+            <List props={props} onReadClick={handleReadClick} onUpdateClick={handleUpdateClick}
             />
         </>
     )

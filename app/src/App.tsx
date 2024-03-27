@@ -1,20 +1,23 @@
 import Router from "./components/Router.tsx"
-import Context from "./components/Context.tsx"
-import {useState} from "react";
+import {useState} from "react"
+import Car from "./components/Car.tsx"
 
 export default function App() {
-    const [items, setItems] = useState<string[]>([])
+    const [items, setItems] = useState<Car[]>([])
 
-    const data = {
-        items,
-        setItems
+    function addItem(newItem: Car) {
+        setItems([...items, newItem])
+    }
+
+    const props = {
+        items: items,
+        setItems: setItems,
+        addItem: addItem
     }
 
     return (
         <>
-            <Context.Provider value={data}>
-                <Router/>
-            </Context.Provider>
+            <Router props={props}/>
         </>
     )
 }

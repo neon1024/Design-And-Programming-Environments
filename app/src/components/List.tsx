@@ -1,23 +1,20 @@
-import {useContext} from "react";
-import Context from "./Context.tsx"
+import Car from "./Car.tsx";
+import {Dispatch, SetStateAction} from "react";
 
 interface Props {
-    onReadClick: () => void,
-    onUpdateClick: () => void
+    items: Car[];
+    setItems: Dispatch<SetStateAction<Car[]>>;
 }
 
-export default function List(props: Props) {
-    const data = useContext(Context);
-    const items = data.items;
-
+export default function List({props, onReadClick, onUpdateClick}: { props: Props, onReadClick: () => void, onUpdateClick: () => void }) {
+    const items = props.items;
     // TODO update the list with the new item added
-
     const handleRead = () => {
-        props.onReadClick();
+        onReadClick();
     }
 
     const handleUpdate = () => {
-        props.onUpdateClick();
+        onUpdateClick();
     }
 
     const handleDelete = () => {
@@ -29,7 +26,7 @@ export default function List(props: Props) {
             <ul className="list-group">
                 {items.map((item, index) =>
                     <li className="list-group-item border rounded" key={index}>
-                        {item}
+                        {item.model}
                         <button className="border rounded" onClick={handleRead}>read</button>
                         <button className="border rounded" onClick={handleUpdate}>update</button>
                         <button className="border rounded" onClick={handleDelete}>delete</button>
