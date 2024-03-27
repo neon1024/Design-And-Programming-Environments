@@ -11,7 +11,7 @@ interface Props {
 export default function AddPage({props}: { props: Props }) {
     return (
         <>
-            <AddForm props={props}/>
+            <AddForm addItem={props.addItem}/>
         </>
     )
 }

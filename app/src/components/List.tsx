@@ -1,14 +1,13 @@
 import Car from "./Car.tsx";
 import {Dispatch, SetStateAction} from "react";
 
-interface Props {
-    items: Car[];
-    setItems: Dispatch<SetStateAction<Car[]>>;
-    addItem: (newItem: Car) => void;
-}
-
-export default function List({props, onReadClick, onUpdateClick}: { props: Props, onReadClick: () => void, onUpdateClick: () => void }) {
-    const items = props.items;
+export default function List({items, setItems, addItem, onReadClick, onUpdateClick}: {
+    items: Car[],
+    setItems: Dispatch<SetStateAction<Car[]>>,
+    addItem: (newItem: Car) => void,
+    onReadClick: () => void,
+    onUpdateClick: () => void
+}) {
     // TODO update the list with the new item added
     const handleRead = () => {
         onReadClick();

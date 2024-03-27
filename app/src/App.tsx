@@ -6,7 +6,7 @@ export default function App() {
     const [items, setItems] = useState<Car[]>([])
 
     function addItem(newItem: Car) {
-        setItems([...items, newItem])
+        setItems(prevItems => [...prevItems, newItem])
     }
 
     const props = {

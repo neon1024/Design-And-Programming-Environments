@@ -9,6 +9,7 @@ import {Dispatch, SetStateAction} from "react"
 interface Props {
     items: Car[],
     setItems: Dispatch<SetStateAction<Car[]>>;
+    addItem: (newItem: Car) => void;
 }
 
 export default function Router({props}: { props: Props }) {

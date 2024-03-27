@@ -24,7 +24,7 @@ export default function MainPage({props}: { props: Props }) {
     return (
         <>
             <button className="border rounded" onClick={handleAddClick}>add</button>
-            <List props={props} onReadClick={handleReadClick} onUpdateClick={handleUpdateClick}
+            <List {...props} onReadClick={handleReadClick} onUpdateClick={handleUpdateClick}
             />
         </>
     )

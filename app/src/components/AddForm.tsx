@@ -1,15 +1,8 @@
 import Car from "./Car.tsx";
-import {ChangeEvent, Dispatch, SetStateAction, useState} from "react"
+import {ChangeEvent, useState} from "react"
 
-interface Props {
-    items: Car[];
-    setItems: Dispatch<SetStateAction<Car[]>>;
-    addItem: (newItem: Car) => void;
-}
-
-export default function AddForm({props}: { props: Props }) {
+export default function AddForm({addItem}: { addItem: (newItem: Car) => void }) {
     const [formData, setFormData] = useState({brand: "", model: "", year: 0})
-    const addItem = props.addItem;
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const changedField = event.target.name;
