@@ -1,38 +1,35 @@
 import Car from "./Car.tsx";
-import {Dispatch, SetStateAction} from "react";
+import {useGetItems} from "./useLocalStorage.tsx";
 
-export default function List({items, setItems, addItem, onReadClick, onUpdateClick}: {
-    items: Car[],
-    setItems: Dispatch<SetStateAction<Car[]>>,
-    addItem: (newItem: Car) => void,
-    onReadClick: () => void,
-    onUpdateClick: () => void
-}) {
-    // TODO update the list with the new item added
+export default function List() {
+    const items: Car[] = useGetItems();
+
     const handleRead = () => {
-        onReadClick();
+        window.open("/read", "_blank");
     }
 
+    // TODO update the list with the new item added
     const handleUpdate = () => {
-        onUpdateClick();
+        window.open("/update", "_blank");
     }
 
-    const handleDelete = () => {
-        // TODO
+    // TODO delete the item using the index
+    const handleDelete = (event) => {
+        console.log(event.dataset.index);
     }
 
     return (
         <>
             <ul className="list-group">
-                {items.map((item, index) =>
+                {items.length > 0 ? (items.map((item, index) =>
                     <li className="list-group-item border rounded" key={index}>
-                        {item.model}
+                        {item.year}
                         <button className="border rounded" onClick={handleRead}>read</button>
                         <button className="border rounded" onClick={handleUpdate}>update</button>
                         <button className="border rounded" onClick={handleDelete}>delete</button>
-                    </li>)
+                    </li>)) : ""
                 }
             </ul>
         </>
     )
-}
+}f

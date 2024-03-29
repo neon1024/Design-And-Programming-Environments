@@ -1,22 +1,25 @@
 import Car from "./Car.tsx";
-import {ChangeEvent, useState} from "react"
+import {ChangeEvent, useState} from "react";
+import {useSetItem} from "./useLocalStorage.tsx";
 
-export default function AddForm({addItem}: { addItem: (newItem: Car) => void }) {
+export default function AddForm() {
     const [formData, setFormData] = useState({brand: "", model: "", year: 0})
+    const add = useSetItem;
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const changedField = event.target.name;
         const newValue = event.target.value;
-        setFormData(currentData => {
-            return {
-                ...currentData,
+        setFormData(
+            {
+                ...formData,
                 [changedField]: newValue
             }
-        })
+        )
+        console.log(formData);
     }
 
     const handleAdd = () => {
-        addItem(new Car(formData.brand, formData.model, formData.year));
+        add(window.localStorage.length, new Car(formData.brand, formData.model, formData.year));
     }
 
     return (
