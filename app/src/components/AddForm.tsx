@@ -15,12 +15,10 @@ export default function AddForm() {
                 [changedField]: newValue
             }
         )
-        console.log(formData);
     }
 
     const handleAdd = () => {
         const key = formData["brand"] + formData["model"] + formData["year"];
-        console.log(key);
         add(key, new Car(formData.brand, formData.model, formData.year));
     }
 

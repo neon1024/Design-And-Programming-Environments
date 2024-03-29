@@ -17,13 +17,14 @@ export default function List() {
     // TODO delete the item using the index
     const handleDelete = (event, index) => {
         remove(index);
+        window.dispatchEvent(new Event("storage"));
     }
 
     return (
         <>
             <ul className="list-group">
-                {items.length > 0 && (items.map((item) =>
-                    <li className="list-group-item border rounded d-flex justify-content-between" key={item.brand + item.model + item.year}>
+                {items.length > 0 && (items.map((item, index) =>
+                    <li className="list-group-item border rounded d-flex justify-content-between" key={index}>
                         <span className="border rounded w-25 text-center">{item.model}</span>
                         <button className="border rounded" onClick={(event) => {
                             handleRead(event, item.brand + item.model + item.year)
