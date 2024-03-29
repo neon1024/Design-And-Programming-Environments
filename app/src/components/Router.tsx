@@ -12,7 +12,7 @@ export default function Router() {
                     <Route index element={<MainPage/>}></Route>
                     <Route path="/home" element={<MainPage/>}></Route>
                     <Route path="/add" element={<AddPage/>}></Route>
-                    <Route path="/read" element={<ReadPage/>}></Route>
+                    <Route path="/read/:id" element={<ReadPage/>}></Route> // TODO custom path
                     <Route path="/update" element={<UpdatePage/>}></Route>
                     <Route path="*" element={<MainPage/>}></Route>
                 </Routes>

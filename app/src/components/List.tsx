@@ -1,5 +1,5 @@
 import Car from "./Car.tsx";
-import {useGetItems, useRemoveItem} from "./useLocalStorage.tsx";
+import useLocalStorage, {useGetItems, useRemoveItem} from "./useLocalStorage.tsx";
 
 export default function List() {
     const items: Car[] = useGetItems();
