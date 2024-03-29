@@ -1,35 +1,35 @@
 export default class Car {
-    private __brand: string;
-    private __model: string;
-    private __year: number;
+    private _brand: string;
+    private _model: string;
+    private _year: number;
 
     constructor(brand: string, model: string, year: number) {
-        this.__brand = brand;
-        this.__model = model;
-        this.__year = year;
+        this._brand = brand;
+        this._model = model;
+        this._year = year;
     }
 
     get brand() {
-        return this.__brand;
+        return this._brand;
     }
 
     set brand(newBrand: string) {
-        this.__brand = newBrand;
+        this._brand = newBrand;
     }
 
     get model() {
-        return this.__model;
+        return this._model;
     }
 
     set model(newModel: string) {
-        this.__model = newModel;
+        this._model = newModel;
     }
 
     get year() {
-        return this.__year;
+        return this._year;
     }
 
     set year(newYear: number) {
-        this.__year = newYear;
+        this._year = newYear;
     }
 }

@@ -19,7 +19,9 @@ export default function AddForm() {
     }
 
     const handleAdd = () => {
-        add(window.localStorage.length, new Car(formData.brand, formData.model, formData.year));
+        const key = formData["brand"] + formData["model"] + formData["year"];
+        console.log(key);
+        add(key, new Car(formData.brand, formData.model, formData.year));
     }
 
     return (
