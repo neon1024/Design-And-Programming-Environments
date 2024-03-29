@@ -14,7 +14,14 @@ export function useSetItem(key: unknown, value: unknown) {
 
 export function useGetItem(key: unknown) {
     try {
-        const value = window.localStorage.getItem(JSON.stringify(key));
+        let value;
+
+        if (typeof key === "string") {
+            value = window.localStorage.getItem(key);
+        } else {
+            value = window.localStorage.getItem(JSON.stringify(key));
+        }
+        
         return value ? value : undefined;
     } catch (error) {
         console.log(error);

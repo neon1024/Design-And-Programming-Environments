@@ -11,7 +11,7 @@ export default function MainPage() {
 
     return (
         <>
-            <button className="border rounded" onClick={handleAddClick}>add</button>
+            <button className="border rounded m-2" onClick={handleAddClick}>add</button>
             <List/>
         </>
     )
