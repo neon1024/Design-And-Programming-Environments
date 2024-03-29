@@ -11,7 +11,7 @@ export default function useLocalStorage() {
         try {
             const item = window.localStorage.getItem(JSON.stringify(key));
             return item ? JSON.parse(item) : undefined;
-        } catch(error) {
+        } catch (error) {
             console.log(error)
         }
     }
@@ -23,14 +23,15 @@ export default function useLocalStorage() {
     function getItems() {
         const items = [];
         const keys = Object.keys(localStorage);
-        let i: number = keys.length;
+        let i: number = 0;
 
-        while ( i-- ) {
-        items.push( localStorage.getItem(keys[i]) );
-    }
+        while (i < keys.length - 1) {
+            items.push(localStorage.getItem(i.toString()));
+            i++;
+        }
 
         return items;
     }
 
-    return { setItem, getItem, removeItem, getItems }
+    return {setItem, getItem, removeItem, getItems}
 }
