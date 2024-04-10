@@ -6,13 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3ba0f00e-989e-4f66-8f35-9caec9695703" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/components/AddForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/components/AddForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/components/Car.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Car.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/components/List.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/components/List.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/components/useLocalStorage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/components/useLocalStorage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/pages/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/pages/MainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/src/pages/UpdatePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/src/pages/UpdatePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +87,7 @@
       <workItem from="1712537650674" duration="2369000" />
       <workItem from="1712706061754" duration="751000" />
       <workItem from="1712707008231" duration="3947000" />
-      <workItem from="1712746107190" duration="7886000" />
+      <workItem from="1712746107190" duration="8098000" />
     </task>
     <servers />
   </component>
