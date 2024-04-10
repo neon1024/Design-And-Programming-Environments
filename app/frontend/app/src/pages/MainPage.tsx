@@ -1,5 +1,4 @@
 import List from "../components/List.tsx";
-import axios from "axios";
 
 export default function MainPage() {
     window.addEventListener("storage", () => {
@@ -7,8 +6,6 @@ export default function MainPage() {
     })
 
     const handleAddClick = () => {
-        const message = axios.get("http://localhost:3000/message").then(response => response.data);
-        console.log(message);
         window.open("/add", "_blank");
     }
 

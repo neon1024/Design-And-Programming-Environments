@@ -1,4 +1,4 @@
-import Car from "./Car.tsx";
+import Car from "../../../../Car.tsx";
 
 export default function useLocalStorage() {
     return {useSetItem, useGetItem, useRemoveItem, useGetItems};

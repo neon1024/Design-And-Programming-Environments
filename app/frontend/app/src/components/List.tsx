@@ -1,6 +1,7 @@
-import Car from "./Car.tsx";
+import Car from "../../../../Car.tsx";
 import {useGetItem, useGetItems, useRemoveItem} from "./useLocalStorage.tsx";
 import {useState} from "react";
+import axios from "axios";
 
 export default function List() {
     const items: Car[] = useGetItems();
@@ -18,9 +19,10 @@ export default function List() {
     }
 
     // TODO delete the item using the index
-    const handleDelete = (event, index) => {
+    const handleDelete = (event, index: string) => {
         remove(index);
         window.dispatchEvent(new Event("storage"));
+        axios.delete(`http://localhost:3000/api/cars/:${index}`).then(response => console.log(response)).catch(error => console.log(error));
     }
 
     const handleCheckbox = (event, index) => {
