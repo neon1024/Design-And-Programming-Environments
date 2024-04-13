@@ -1,6 +1,6 @@
 import Car from "../../../../Car.tsx";
 import {useGetItem, useGetItems, useRemoveItem} from "./useLocalStorage.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 export default function List() {
@@ -9,20 +9,36 @@ export default function List() {
     const get = useGetItem;
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
+    const [cars, setCars] = useState<Car[]>([]);
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:3000/api/cars")
+            .then((response) => {
+                setCars(response.data);
+            })
+            .catch((error) => console.log(error));
+    }, []);
+
     const handleRead = (event, index) => {
         window.open("/read/" + index, "_blank");
     }
 
-    // TODO update the list with the new item added
     const handleUpdate = (event, index) => {
         window.open("/update/" + index, "_blank");
     }
 
-    // TODO delete the item using the index
     const handleDelete = (event, index: string) => {
         remove(index);
         window.dispatchEvent(new Event("storage"));
-        axios.delete(`http://localhost:3000/api/cars/:${index}`).then(response => console.log(response)).catch(error => console.log(error));
+
+        axios.delete(`http://localhost:3000/api/cars/:${index}`)
+            .then(
+                response => console.log(response)
+            )
+            .catch(
+                error => console.log(error)
+            );
     }
 
     const handleCheckbox = (event, index) => {
@@ -40,7 +56,17 @@ export default function List() {
     }
 
     function removeSelectedItems() {
-        selectedItems.forEach((selectedItem) => remove(selectedItem));
+        selectedItems.forEach((selectedItem) => {
+            remove(selectedItem);
+
+            axios.delete(`http://localhost:3000/api/cars/:${selectedItem}`)
+                .then(
+                    (response) => console.log(response)
+                )
+                .catch(
+                    (error) => console.log(error)
+                );
+        });
 
         setSelectedItems([]);
 
@@ -88,7 +114,8 @@ export default function List() {
                 border-start-0
                 rounded-3
                 m-2"
-                    type="button" onClick={removeSelectedItems}>delete</button>
+                    type="button" onClick={removeSelectedItems}>bulk delete
+            </button>
             <button className="
                 border-3
                 border-top-0
@@ -96,11 +123,12 @@ export default function List() {
                 border-bottom
                 border-start-0
                 rounded-3
-                m-2" type="button" onClick={exportSelectedItems}>export JSON</button>
+                m-2" type="button" onClick={exportSelectedItems}>export JSON
+            </button>
             <ul className="list-group">
-                {items.length > 0 && (items.map((item, index) =>
+                {cars.length > 0 && (cars.map((car, index) =>
                     <li className="list-group-item border rounded d-flex justify-content-between" key={index}>
-                        <span className="border rounded w-25 text-center">{item.model}</span>
+                        <span className="border rounded w-25 text-center">{car.model}</span>
                         <button className="
                             border-3
                             border-top-0
@@ -108,7 +136,7 @@ export default function List() {
                             border-bottom
                             border-start-0
                             rounded-3" onClick={(event) => {
-                            handleRead(event, item.brand + item.model + item.year)
+                            handleRead(event, car.id)
                         }}>read
                         </button>
                         <button className="
@@ -118,7 +146,7 @@ export default function List() {
                             border-bottom
                             border-start-0
                             rounded-3" onClick={(event) => {
-                            handleUpdate(event, item.brand + item.model + item.year)
+                            handleUpdate(event, car.id)
                         }}>update
                         </button>
                         <button className="
@@ -129,10 +157,10 @@ export default function List() {
                                 border-start-0
                                 rounded-3"
                                 onClick={(event) => {
-                            handleDelete(event, item.brand + item.model + item.year)
-                        }}>delete
+                                    handleDelete(event, car.id);
+                                }}>delete
                         </button>
-                        <input type="checkbox" checked={selectedItems.includes(item.brand + item.model + item.year)} onChange={(event) => handleCheckbox(event, item.brand + item.model + item.year)}/>
+                        <input type="checkbox" checked={selectedItems.includes(car.id)} onChange={(event) => handleCheckbox(event, car.id)}/>
                     </li>))
                 }
             </ul>

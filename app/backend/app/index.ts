@@ -1,120 +1,81 @@
-import {isNull} from "node:util";
+import express, {Express, Request, Response} from "express";
 
-const express = require("express");
-import {Request, Response, urlencoded} from "express";
 const cors = require("cors");
-import * as dotenv from "dotenv";
+
+import dotenv from "dotenv";
+import Car from "./Car.ts";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
-const PORT = process.env.PORT;
-
-const app = express();
+const app: Express = express();
+const port: number = parseInt(process.env.PORT || "") || 8080;
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded());
-
-app.listen(PORT, () => `Express Server running on PORT ${PORT}.`);
-
-class Car {
-    private _brand: string;
-    private _model: string;
-    private _year: number;
-
-    constructor(brand: string, model: string, year: number) {
-        this._brand = brand;
-        this._model = model;
-        this._year = year;
-    }
-
-    get brand() {
-        return this._brand;
-    }
-
-    set brand(newBrand: string) {
-        this._brand = newBrand;
-    }
-
-    get model() {
-        return this._model;
-    }
-
-    set model(newModel: string) {
-        this._model = newModel;
-    }
-
-    get year() {
-        return this._year;
-    }
-
-    set year(newYear: number) {
-        this._year = newYear;
-    }
-}
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.raw());
+app.use(bodyParser.text());
 
 const cars: Car[] = [];
 
 app.get("/", (req: Request, res: Response) => {
-   res.status(200).send("Express + TypeScript App");
+    res.send("All good!");
+});
+
+app.listen(port, () => {
+    console.log(`Server started at port ${port}`);
 });
 
 app.get("/api/cars", (req: Request, res: Response) => {
-   res.status(200).send(cars);
+    res.status(200).send(cars);
 });
 
+// TODO validation
 app.post("/api/cars", (req: Request, res: Response) => {
-   const car: Car = new Car(req.body["brand"], req.body["model"], req.body["year"]);
-   console.log(car);
+    const params: {
+        brand: string,
+        model: string,
+        year: number
+    } = req.body;
 
-   if(Object.keys(car).length == 0) {
-      return res.status(400).send("[!] Object is null.");
-   }
+    const newCar: Car = new Car(params.brand, params.model, params.year);
 
-   cars.push(car);
+    cars.push(newCar);
 
-   res.send(201);
+    res.sendStatus(201);
 });
 
-app.put("/api/cars/:oldKey",(req: Request, res: Response) => {
-   const oldKey = req.params.oldKey.substring(1);
+// TODO validation
+app.put("/api/cars/:oldID", (req: Request, res: Response) => {
+    const oldID: string = req.params.oldID.substring(1);
 
-   const position = cars.findIndex((car) => "" + car.brand + car.model + car.year == oldKey);
+    const params: {
+        brand: string,
+        model: string,
+        year: number
+    } = req.body;
 
-   console.log(oldKey, position);
+    const newCar: Car = new Car(params.brand, params.model, params.year);
 
-   if(position == -1) {
-       return res.status(404).send("[!] Object not found.");
-   }
+    const index: number = cars.findIndex((car) => car.id == oldID);
 
-   const newBrand = req.body["brand"];
-   const newModel = req.body["model"];
-   const newYear = parseInt(req.body["year"]);
+    cars.splice(index, 1);
 
-   console.log(newBrand, newModel, newYear);
+    cars.push(newCar);
 
-   cars[position].brand = newBrand;
-   cars[position].model = newModel;
-   cars[position].year = newYear;
-
-   res.send(200);
+    res.sendStatus(200);
 });
 
-app.patch("/api/cars", (req: Request, res: Response) => {
-   // TODO
-   res.send(200);
+// TODO validation
+app.delete("/api/cars/:removalID", (req: Request, res: Response) => {
+    const removalID = req.params.removalID;
+
+    const index: number = cars.findIndex((car) => car.id == removalID);
+
+    cars.splice(index, 1);
+
+    res.sendStatus(200);
 });
 
-app.delete("/api/cars/:index", (req: Request, res: Response) => {
-   const index = req.params.index.substring(1);
-
-   const position = cars.findIndex((car: Car) => "" + car.brand + car.model + car.year == index);
-
-   if(position == -1) {
-      return res.status(404).send("[!] Object not found.");
-   }
-
-   cars.splice(position, 1);
-
-   res.status(200).send(index);
-});
+export default app;

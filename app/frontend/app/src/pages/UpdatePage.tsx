@@ -31,6 +31,7 @@ export default function UpdatePage() {
 
         const newKey = brand + model + year;
         add(newKey, new Car(brand, model, year));
+        
         axios.put(`http://localhost:3000/api/cars/:${oldKey}`, {"brand": brand, "model": model, "year": year}).then(response => console.log(response)).catch(error => console.log(error));
     }
 
@@ -45,7 +46,7 @@ export default function UpdatePage() {
                 border-top-0
                 border-end
                 border-bottom
-                rounded
+                rounded-3
                 border-start-0" type="button" onClick={handleUpdate}>update
                 </button>
             </form>
