@@ -1,0 +1,33 @@
+.CarDetails img {
+    width: 550px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.Car {
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.Delete-Button {
+    background-color: var(--danger);
+}
+
+.Edit-Button {
+    background-color: var(--warning);
+}
+
+.Buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Back-Link {
+    display: flex;
+}
+
+.ServiceRecords {
+    text-align: center;
+}

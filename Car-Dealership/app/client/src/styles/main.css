@@ -1,0 +1,26 @@
+:root {
+    --primary: #131515;
+    --secondary: #8CFBDE;
+    --text: #F8F0FB;
+    --accent: #00F5ED;
+    --safe: #00F5ED;
+    --warning: #00F5ED;
+    --danger: #F8333C;
+}
+
+html {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    background-color: var(--primary);
+
+    font-family: Jura, sans-serif;
+    font-size: 16px;
+}
