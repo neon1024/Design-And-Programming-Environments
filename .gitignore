@@ -1,3 +1,7 @@
 app/frontend/app/node_modules
 app/backend/app/node_modules
 app/backend/app/.env
+/app/backend/app/node_modules
+/app/backend/app/node_modules
+/app/backend/app/node_modules/.bin
+/app/backend/app/node_modules
